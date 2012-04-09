@@ -1,0 +1,679 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  text-align: center;
+  color: #333;
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 12px;
+}
+html.withbg body {
+  background: transparent;
+  width: 612px;
+  padding: 344px 0 0 157px;
+  height: 701px;
+}
+
+#taxr-categories {
+	padding-left: 20px;
+}
+
+#taxr-categories .odd{
+  background: url(../images/receipt_2012_horz_pattern.png) top left repeat-x;
+}
+
+/* footer */
+#taxr-footer-links {
+  line-height: 16px;
+  margin: 0px 0px 0px -11px;
+  padding: 2px 10px;
+  font-weight: bold;
+  border-right: 1px solid #D5D8DA;
+  border-left: 1px solid #D5D8DA;
+  height: 200px;
+  width: 100%;
+}
+
+#taxr-page {
+  width: 696px;
+  margin: 0 auto;
+  background: #fff;
+  text-align: left;
+}
+
+  /* For addthis */
+  #at15s_head,
+  #at16pf {
+    display: none;
+  }
+
+/* /footer */
+
+#taxr-page a:link,
+#taxr-page a:visited {
+  color: #336699;
+  text-decoration: none;
+}
+#tst .tst-reply a:link,
+#tst .tst-reply a:visited {
+  text-decoration: underline;
+}
+p {
+  padding: 0;
+  margin: 0 0 1em;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  margin-top: 0;
+}
+h2 {
+  font-size: 2em;
+}
+
+#taxr-nav ul
+{
+    margin:0px auto;
+    padding:0px;
+    list-style:none;
+}
+#taxr-nav ul li
+{
+    float:left;
+    margin:0px;
+    list-style:none;
+    padding:0px 10px;
+}
+
+.col1 li {
+	color: green;
+	border: 2px solid green;
+	text-transform: italicize;
+}
+li {
+  padding: 10px 0px 10px 10px;
+  margin-left: 25px;
+}
+li ol { display: none; } 
+.li-toggle {
+  float: left;
+  margin-left: -40px;
+  margin-top: 10px;
+  width: 15px;
+  text-align: center;
+  cursor: pointer;
+  background: #ccc;
+}
+
+.ui-tabs-selected { border: 2px solid green; padding: 10px; } 
+
+.ui-tabs-hide {
+	display: none; 
+}
+
+div[id*='taxr-cat-head-'] {
+  background: none repeat scroll 0 0 #FFFFFF;
+  border-top: 1px solid #CCCCCC;
+  color: #333333;
+  font-size: 12px;
+  font-weight: bold;
+  height: 30px;
+  margin-bottom: -10px;
+  margin-top: 0px;
+  padding: 5px 5px 0 25px;
+}
+
+div[id*='taxr-cat-head-'] .taxr-col1 {
+	background: url(../images/receipt_expand_btn_sprite.png) no-repeat;
+	margin-left: -19px;
+	padding-left: 19px; 
+	height: 16px;
+}
+
+div[id*='taxr-cat-head-'] .taxr-col1:hover {
+	background-position: 0 -16px;
+}
+
+.taxr-cat-head-expand .taxr-col1 {
+	background: url(../images/receipt_collapse_btn_sprite.png) no-repeat !important;
+	margin-left: -19px;
+	padding-left: 19px; 
+	height: 16px;
+}
+
+div[id*='taxr-cat-tophead'] {
+  border-top: 1px solid #CCCCCC;
+  font-weight: bold;
+  height: 19px;
+  margin-top: 0;
+  padding: 5px 5px 0 25px;
+}
+
+div[id*='taxr-cat-content-'] {
+	margin-top: 0px;
+}
+
+.taxr-cat-head-expand {
+	background: url(../images/receipt_2012_horz_orgn_pattern.png) repeat !important;
+	color: #fff !important;
+	height: 29px !important;
+}
+
+.taxr-cat-head-expand .taxr-col1 a, .taxr-cat-head-expand .taxr-col2 {
+	color: #fff !important;
+}
+
+
+.taxr-row {
+	width: 97%; 
+	clear: both; 
+	font-size: 12px;
+}
+.taxr-row .taxr-col3{
+  margin-right: -15px;
+}
+.taxr-col1 { width: 70%; float: left; text-align: left; }
+.taxr-col2 { width: 5%; float: left; text-align: right; color: #8a8a8a; }
+.taxr-col3 { float: right; text-align: right; padding-right: 0px }
+.taxr-income-row { margin-bottom: 20px; }
+.taxr-cat-sub .taxr-col3 {
+	padding-right: 2px;
+}
+#taxr-income-row .taxr-col1 { font-weight: bold; width: 420px; float: left; text-align: left; }
+#taxr-income-row .taxr-col2 { width: 122px; float: left; text-align: center; color: #999; font-weight: bold; font-size: .9em; }
+#taxr-income-row .taxr-col3 { padding-right: 8px;  }
+.taxr-col1 a {
+	color: #333 !important;
+}
+.taxr-cat-sub { 
+	background: #eee;
+	padding: 10px 0px 30px 25px; 
+	font-style: italic;
+	color: #4f4451;
+}
+#taxr-footer {
+	width: 696px;
+	margin: 0 auto 10px;
+	background:  url(../images/receipt_bottom_edge.jpg) no-repeat scroll center bottom;
+	overflow: hidden;
+	text-align: right;
+	text-decoration: none;
+	height: 10px;
+}
+#taxr-calculate-range-container {
+	height: 60px;
+	vertical-align: middle;
+	color: #999;
+	font-weight: bold;
+	background:  url(../images/receipt_subnav_shadow.png) no-repeat scroll center bottom;
+	margin-top: 15px;
+}
+.taxr-info .city, .taxr-info .date {
+  color: #ccc;
+  text-transform: uppercase;
+  font-family: Georgia , Serif;
+  font-size: 13px;
+  position: absolute;
+  top: 47px;
+}
+.taxr-info .city{
+  left: 15px;
+}
+.taxr-info .date{
+  right: 15px;
+}
+.taxr-info{
+  background: url("../images/receipt_2012_header.png") no-repeat scroll center top transparent;
+  height: 110px;
+  left: 0;
+  position: absolute;
+  top: -23px;
+  width: 694px;
+}
+
+#taxr-header {
+	height: 95px; 
+	border-right: 1px solid #cecece;
+  border-left: 1px solid #cecece;
+  position: relative;
+  margin-top: 50px;
+}
+
+#taxr-header-title {
+	height: 80px; 
+	border-right: 1px solid #cecece;
+  border-left: 1px solid #cecece;
+  text-align: center;
+}
+
+.subtitle-rule{
+  background-color: #cecece;
+  border: 0 none;
+  color: #cecece;
+  height: 1px;
+  width: 565px;
+}
+
+#taxr-header-title h1{
+  font-size: 36px;
+  text-transform: uppercase;
+  font-family: Georgia , Serif;
+  margin: 0px;
+}
+#taxr-header-title .subtitle{
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+#taxr-nav { 
+	padding: 5px; 
+	margin: 10px auto 10px auto;
+	clear: both;
+	height: 25px;
+	width: 350px;
+	font-weight: bold;
+}
+.taxr-instructions {
+  color: #EEEEEE;
+  font-weight: bold;
+  padding-top: 11px;
+  text-align: center;
+}	
+#taxr-tabset {
+	padding: 5px 10px;
+	border-left: 1px solid #d5d8da;
+	border-right: 1px solid #d5d8da;
+}
+#taxr-calculate-form {
+  background: url("../images/receipt_2012_interface.png") no-repeat scroll left top transparent;
+  float: left;
+  height: 137px;
+  margin-left: -9px;
+  position: relative;
+  width: 690px;
+}
+#taxr-input {
+	margin-top: 5px;
+  width: 160px;
+	float: left;
+  padding-top: 11px;
+}
+.input-1{
+  padding-left:19px;
+}
+.input-2{
+  padding-left:22px;
+}
+.input-3{
+  padding-left:20px;
+}
+#taxr-input label {
+	color: #fff;
+	font-weight: bold;
+  margin-bottom: 3px;
+  display: block;
+}
+#taxr-input input {
+  color: #666;
+  width: 120px;
+	padding:5px;
+	border: 0px;
+	height: 14px;
+}
+
+#taxr-calculate-button {
+  background: url("../images/receipt_2012_calculate_btn.png") no-repeat scroll 0 0 transparent;
+  cursor: pointer;
+  float: left;
+  height: 40px;
+  margin: 20px 10px 10px 18px;
+  width: 120px;
+}
+
+#taxr-calculate-button:hover {
+  background-position: 0 -42px; 
+}
+
+a[id*='taxr-info-btn-'] {
+	width: 17px;
+	background: url(../images/receipt_info_btn_sprite.png) no-repeat scroll;
+	height: 17px;
+	margin: 5px 0px 0px 0px;
+	float: right;
+}
+
+.taxr-top-row {
+	clear: both;
+	width: 100%;
+	border-top: 3px solid #bbb;
+	margin: 10px 0px;
+	padding: 10px 0px;
+}
+.taxr-top-row-first {
+	margin-top: 10px;
+} 
+#taxr-cola { 
+	width: 550px;
+	float: left;
+}
+#taxr-cola h3, #taxr-cola #taxr-subhead, #taxr-income-row #taxr-subhead, #data-socsec-tax, #data-medicare-tax, #data-income-tax {
+	font-size: 15px;
+	font-family: "Arial",sans-serif;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+#taxr-cola b { margin-left: 20px; } 
+#taxr-colb {
+	float: right;
+	font-weight: 800;
+	margin-left: 3px;
+	text-align: right;
+	padding-right: 8px;
+}
+.clearfix {
+	clear: both;
+	margin: 5px 0px; 
+}
+#taxr-total-bar #taxr-colb{
+  margin-right: -8px;
+}
+#taxr-total-bar {
+  background: url("../images/receipt_2012_horz_pattern_bottom.png") repeat scroll 0 0 transparent;
+  color: #FFFFFF;
+  font-size: 14px;
+  height: 34px;
+  margin: 10px 10px 10px 0;
+  padding: 10px 5px 0 10px;
+  width: 660px;
+}
+
+#taxr-blueb {
+	width: 24%;
+	font-size: 15px;
+	color: #d67400;
+	float: left;
+	text-align: right;
+	margin-right:3px;
+}
+#taxr-bluea {
+	width: 75%;
+	float: left;
+	font-size: 15px;
+	color: #d67400;
+	width: 75%;
+}
+#taxr-embed-box {
+	display: none;
+}
+textarea {
+	font-size: .75em;
+	padding: 3px;
+	margin: 6px;
+}
+#taxr-cat-expand-all { color: #336699 !important; }
+#taxr-cat-collapse-all { display: none; color: #336699 !important; }
+#taxr-cat-toggle {
+	font-weight: bold;
+	margin: 0px 60px;
+}
+
+.draftText { 
+	font-size: 1.25em;
+	color: red;
+}
+.taxr-cat-sub .taxr-row {
+	padding-top: 5px;
+}
+#taxr-range-select {
+	width: 250px;
+	border: 2px solid black;
+	background: #eee;
+	display: none;
+	position: absolute;
+	z-index: 1000;
+	padding: 10px; 
+	margin: 35px 300px; 
+}
+#taxr-range-row {
+	margin: 10px auto;
+	width: 480px;
+}
+#taxr-range-label {
+	margin: 10px;
+	float: left;
+	color: #880000;
+}
+
+#taxr-print-link {
+	border: 0px;	
+	background: url("../images/calculator_print_button.png") no-repeat scroll transparent;
+	float: right;
+	height: 15px;
+	width: 55px;
+	cursor: pointer;
+	margin: 12px;
+}
+#taxr-footer-link-list {
+	float: left;
+	padding: 0px 0px 5px 0px;
+	margin-top: 10px;
+}
+#taxr-footer-list {
+	font-size: 12px;
+	width: 673px; 
+	float: left;
+	height: 47px;
+}
+#taxr-footer-subscribe {
+	clear: both;
+	font-size: 11px;
+	border-top: 1px solid #ddd;
+	margin: 10px 0px; 
+	padding: 10px 0px; 
+}
+
+#taxr-range-toggle {
+  background: url("../images/receipt_2012_drop_down.png") no-repeat scroll 0 0 transparent !important;
+  cursor: pointer;
+  float: left;
+  height: 35px;
+  margin-left: 152px;
+  margin-top: 5px;
+  width: 189px;
+  margin-bottom: 10px;
+}
+
+#taxr-range-toggle:hover {
+	margin-left: 5px; 
+	background: url("../images/receipt_2012_drop_down.png") no-repeat scroll 0px -36px transparent !important;
+  cursor: pointer;
+  float: left;
+  height: 35px;
+  margin-left: 152px;
+  margin-top: 5px;
+  width: 189px;
+  margin-bottom:10px;
+}
+#taxr-range-toggle:focus {
+	margin-left: 5px; 
+	background: url("../images/receipt_2012_drop_down.png") no-repeat scroll 0px -72px transparent !important;
+  cursor: pointer;
+  float: left;
+  height: 35px;
+  margin-left: 152px;
+  margin-top: 5px;
+  width: 189px;
+  margin-bottom:10px;
+}
+
+
+div[id^='taxr-error-'] {
+	display: none;
+}
+
+a[id^='taxr-range-link-'] {
+	font-size: 13px;
+	font-weight: bold;
+	line-height: 21px;
+}
+#taxr-range-text {
+	font-size: 11px;
+	line-height: 15px;
+	color: #333;
+	margin-left: 10px;
+}
+#taxr-numbers h3 {
+	color: #800;
+	font-size: 13px;
+	font-weight: bold;
+	font-family: Arial, helvetica;
+}
+#taxr-numbers {
+	font-size: 13px;
+	line-height: 16px;
+	margin: 5px 10px 0px 0px; 
+	border-bottom: 1px solid #ddd;
+}
+#taxr-numbers a {
+	font-weight: bold;
+}
+
+#taxr-social-links {
+	float: right; 
+	margin-top: 8px; 
+}
+
+#taxr-social-links a, #taxr-social-links img {
+	border: 0px; 
+}
+.taxr-income-instr{
+  bottom: 20px;
+  color: #FFFFFF;
+  font-weight: normal;
+  left: 222px;
+  letter-spacing: 1px;
+  position: absolute;
+}
+#taxr-embedbox-link, #taxr-embedbox-link:hover, #taxr-embedbox-link:focus{
+  background: url("../images/receipt_2012_embed_btn.png") repeat scroll 0 0 transparent;
+  float: right;
+  height: 34px;
+  text-indent: -9999px;
+  width: 98px;
+  margin-top: 7px;
+}
+#taxr-embedbox-link:hover {
+  background-position: 0px -37px;
+}
+.calculate-button, .calculate-button:hover, .calculate-button:focus{
+  background: url("../images/receipt_calculate_back_btn.png") repeat scroll 0 0 transparent;
+  float: left;
+  height: 35px;
+  margin: 10px 215px 30px 230px;
+  text-indent: -9999px;
+  width: 223px;
+}
+.calculate-button:hover{
+  background-position: 0px -36px;
+}
+.calculate-button:focus{
+  background-position: 0px -68px;  
+}
+a.numbers-link, a.calculate-button2{
+  background: url("../images/receipt_2012_sm_arrow_btn.png") no-repeat scroll right top transparent;
+  float: left;
+  font-weight: bold;
+  height: 19px;
+  line-height: 18px;
+  margin: 10px 0;
+  padding-right: 20px;
+}
+a.numbers-link:hover {
+  background-position: 179px -18px;
+  padding-right: 20px;
+  color: #003366 !important;
+}
+.range-container{
+  padding:5px 0px;
+  cursor: pointer;
+}
+.range-container a:hover{
+  color: #003366 !important;  
+}
+a.underline:hover {
+  color: #003366 !important;
+}
+a.underline2:hover {
+  color: #336699 !important;
+}
+.taxr-cat-head-expand a.underline2:hover{
+  color: #fff !important;
+  text-decoration: none !important;
+}
+
+/*chart legend*/
+#container{
+  float:left;
+  display:inline-block;
+}
+.legend{
+  float:left;
+  display:inline-block;
+}
+.legend ul{
+  list-style: none none;
+  margin: 33px 0px 0px 5px;
+  padding: 0;
+  position: absolute;
+  width: 370px;
+}
+.legend ul li{
+  font-size: 11px;
+  font-weight: bold;
+  margin:0;
+  padding:0px 0px 0px 0px;
+}
+.taxr-footer-list-wrapper{
+  border: 0px 1px solid #666;
+}
+.chart-container{
+  width: 100%;
+  height:300px;
+}
+/*buffett links*/
+.buffett-upper{
+  background: url(../images/receipt_2012_top_shadow.png) top left no-repeat;
+  height: 15px;
+  width: 100%;
+  float: left;
+}
+.buffett-lower{
+  background: url(../images/receipt_2012_bottom_shadow.png) bottom left no-repeat;
+  height: 15px;
+  width: 100%;
+  float: left;
+}
+div.buffett-left{
+  background: url(../images/receipt_promo_bar_left.jpg) top left no-repeat;
+  height: 42px;
+  width: 309px;
+  display: inline-block;
+  float: left;
+  padding: 18px 0px 20px 20px;
+  font-size: 14px;
+  color: #fff;
+}
+a.buffett-right, a.buffett-right:hover, a.buffett-right:focus{
+  background: url(../images/receipt_promo_bar_btn.jpg) top left no-repeat;
+  color: white !important;
+  font-weight: normal;
+  height: 42px;
+  width: 244px;
+  display: inline-block;
+  float: left;
+  padding: 25px 65px 15px 35px;
+  font-size: 14px;
+}
+a.buffett-right:hover, a.buffett-right:focus{
+  background-position: 0px -86px;
+}

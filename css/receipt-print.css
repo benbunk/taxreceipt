@@ -1,0 +1,29 @@
+/* Print Styling */
+html#taxr-html,
+html#taxr-html body {
+  background: #fff;
+  font-size: 12pt;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+#taxr-footer-links, #taxr-nav, #taxr-calculate-form-top, #taxr-calculate-range-container, #taxr-social-links, #taxr-cat-toggle { 
+	display: none;
+}
+
+#taxr-header-title {
+	height: 95px !important;
+}
+
+.taxr-cat-sub {
+	padding: 5px 0 20px 25px !important;
+}
+
+#taxr-tabset {
+	border: 0px; 
+}
+
+#taxr-income-row .taxr-col2, #taxr-cola b { 
+	font-size: .75em !important;
+}
