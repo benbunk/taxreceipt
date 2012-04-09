@@ -1,58 +1,14 @@
 <?php
 /**
- * @file taxreceipt.module
- */
-
- /**
-  * Implements hook_menu().
-  */
-function taxreceipt_menu() {
-  $items = array();
-
-  $items['taxreceipt/%'] = array(
-    'page callback' => 'taxreceipt_page',
-    'page arguments' => array(1),
-    'access arguments' => array('access content'),
-  );
-
-  return $items;
-}
-
-/**
- * Callback for path: taxreceipt/%.
+ * @file taxreceipt.tpl.php
  * 
- * $arg
- *  String or Integer.
+ * variables
+ * - $line_items, array('Line item name' => 'percent')
+ *     e.g. $line_items = array('National Defense' => '24.9', ... )
  */
-function taxreceipt_page($arg) {
-  $html = '';
-  if ($arg == 'original') {
-    $html = _original_html();
-  }
-  else if (is_numeric($arg)) {
-    // $arg should be an nid.
-    // @todo Add validation/error handling here.
-    $node = node_load($arg);
-    
-  }
-  return $html;
-} 
-
-
-function _original_html() {
-  $path = drupal_get_path('module', 'taxreceipt');
-  drupal_add_js($path . '/js/jquery-1.4.4.min.js');
-  drupal_add_js($path . '/js/jquery.bt.min.js');
-  drupal_add_js($path . '/js/jquery.hoverIntent.min.js');
-  drupal_add_js($path . '/js/receipt.js');
-//  drupal_add_js($path . '/js/highcharts.src.js');
-//  drupal_add_js($path . '/js/chart.js');
-
-  drupal_add_css($path . '/css/receipt.css');
-  drupal_add_css($path . 'css/receipt-print.css');
-
-  return
-'
+$vars = get_defined_vars();
+dsm($vars); 
+?>
 <body id="taxr-page">
 <div id="taxr-header">
   <div class="taxr-info">
@@ -74,12 +30,12 @@ function _original_html() {
 				<div id="taxr-input" class="input-1">
 					<label>Social Security Tax</label>
 					<input name="taxr-input-socsec" value="Enter Dollar Amount">
-					<a href="javascript:;" id="taxr-info-btn-socsec" title="Please enter the amount of Social Security taxes you paid in 2011. You can generally find this information on the Form W-2 your employer sent you, in box 4, labeled &quot;Social security tax withheld.&quot;"></a>
+					<a href="javascript:;" id="taxr-info-btn-socsec" title="Please enter the amount of Social Security taxes you paid in 2011. You can generally find this information on the Form W-2 your employer sent you, in box 4, labeled 'Social security tax withheld.'"></a>
 				</div>
 				<div id="taxr-input" class="input-2">
 					<label>Medicare Tax</label>
 					<input name="taxr-input-medicare" value="Enter Dollar Amount">
-					<a href="javascript:;" id="taxr-info-btn-medicare" title="Please enter the amount of Medicare taxes you paid in 2011. You can generally find this information on the Form W-2 your employer sent you, in box 6, labeled &quot;Medicare tax withheld.&quot;"></a>
+					<a href="javascript:;" id="taxr-info-btn-medicare" title="Please enter the amount of Medicare taxes you paid in 2011. You can generally find this information on the Form W-2 your employer sent you, in box 6, labeled 'Medicare tax withheld.'"></a>
 				</div>
 				<div id="taxr-input" class="input-3">
 					<label>Income Tax</label>
@@ -87,7 +43,7 @@ function _original_html() {
 					<a href="javascript:;" id="taxr-info-btn-income" title="Please enter the amount of your income tax liability for 2011.  This is not the additional amount you owe (if any) on April 15 but rather the whole amount of federal income taxes for 2011: amounts already withheld from your paycheck during 2011 plus any additional amount paid on April 15 or minus any refund you applied for on April 15.  You can generally find this total figure in your income tax return, line 11 of Form 1040EZ or line 55 of Form 1040."></a>
 				</div>
 				<div id="taxr-calculate-button"></div>
-				<div class="taxr-income-instr">Don&quot;t have your tax information handy?</div>		
+				<div class="taxr-income-instr">Don't have your tax information handy?</div>		
 			</div>
 		</div>
 		<div id="taxr-calculate-range-container"> 
@@ -97,15 +53,15 @@ function _original_html() {
 			<div id="taxr-range-select">
 			    <div class="range-container">
 					<a href="javascript:;" id="taxr-range-link-one" data-socsec="1050" data-medicare="363" data-income="1775">$25,000 income &mdash; single with no children</a><br />
-					<p id="taxr-range-text">This assumes this family example contributes 2 percent of their wage income to a 401(k) or IRA, does not itemize, claims the Saver&quot;s Credit, and Making Work Pay.</p>
+					<p id="taxr-range-text">This assumes this family example contributes 2 percent of their wage income to a 401(k) or IRA, does not itemize, claims the Saver's Credit, and Making Work Pay.</p>
 					</div>
 					<div class="range-container">
 					<a href="javascript:;" id="taxr-range-link-two" data-socsec="1441" data-medicare="497" data-income="803">$35,000 income &mdash; single parent with one child</a><br />
-					<p id="taxr-range-text">This assumes this family example contributes 2 percent of their wage income to a 401(k) or IRA, does not itemize, and claims the Saver&quot;s Credit, as well as Making Work Pay, the EITC, and the Child Tax Credit.</p>
+					<p id="taxr-range-text">This assumes this family example contributes 2 percent of their wage income to a 401(k) or IRA, does not itemize, and claims the Saver's Credit, as well as Making Work Pay, the EITC, and the Child Tax Credit.</p>
 					</div>
 					<div class="range-container">
 					<a href="javascript:;" id="taxr-range-link-three" data-socsec="2100" data-medicare="725" data-income="995">$50,000 income &mdash; married with one child</a><br />
-					<p id="taxr-range-text">This assumes this family contributes 2 percent of their wage income to a 401(k) or IRA, does not itemize, and claims the Saver&quot;s Credit, as well as the Making Work Pay and Child Tax Credits.</p>
+					<p id="taxr-range-text">This assumes this family contributes 2 percent of their wage income to a 401(k) or IRA, does not itemize, and claims the Saver's Credit, as well as the Making Work Pay and Child Tax Credits.</p>
 					</div>
 					<div class="range-container">
 					<a href="javascript:;" id="taxr-range-link-four" data-socsec="2520" data-medicare="870" data-income="4558">$60,000 income &mdash; single parent with one child</a><br />
@@ -145,13 +101,13 @@ function _original_html() {
 					<div class="taxr-row"><div class="taxr-col1"><a href="javascript:;" id="taxr-info-cat-defense4" title="Spending on atomic energy defense activities. (Corresponds to budget subfunction 053)">Atomic energy defense activities</a></div><div class="taxr-col2">0.7%</div><div class="taxr-col3"><div id="taxr-data-percent-defense4" data-percent="0.7">$0</div></div></div>
 					<div class="taxr-row"><div class="taxr-col1"><a href="javascript:;" id="taxr-info-cat-defense5" title="Spending on defense-related FBI activities, Department of Defense revolving funds, and additional national defense activities. (Corresponds to the remainder of budget function 050)">Defense-related FBI activities and additional national defense</a></div><div class="taxr-col2">0.2%</div><div class="taxr-col3"><div id="taxr-data-percent-defense5" data-percent="0.2">$0</div></div></div>
 				</div>
-			<div id="taxr-cat-head-healthcare"><div class="taxr-row"><div class="taxr-col1"><a href="javascript:;" id="taxr-info-cat-healthcare" class="underline2"  title="Spending on Medicare Supplementary Medical Insurance and the prescription drug benefit, Medicaid, Children&quot;s Health Insurance Program, food safety, disease control and additional health care activities. Because this calculator focuses on how income taxes are spent, spending from Medicare taxes is excluded. Additionally, health care for the armed forces is included under National Defense and health care for veterans is included under Veterans Benefits. (Corresponds to budget functions 550 and 570)">Health care</a></div><div class="taxr-col2">23.7%</div><div class="taxr-col3"><div id="taxr-data-percent-healthcare" data-percent="23.7">$0</div></div></div></div>
+			<div id="taxr-cat-head-healthcare"><div class="taxr-row"><div class="taxr-col1"><a href="javascript:;" id="taxr-info-cat-healthcare" class="underline2"  title="Spending on Medicare Supplementary Medical Insurance and the prescription drug benefit, Medicaid, Children's Health Insurance Program, food safety, disease control and additional health care activities. Because this calculator focuses on how income taxes are spent, spending from Medicare taxes is excluded. Additionally, health care for the armed forces is included under National Defense and health care for veterans is included under Veterans Benefits. (Corresponds to budget functions 550 and 570)">Health care</a></div><div class="taxr-col2">23.7%</div><div class="taxr-col3"><div id="taxr-data-percent-healthcare" data-percent="23.7">$0</div></div></div></div>
 				<div id="taxr-cat-content-healthcare" class="taxr-cat-sub">
-					<div class="taxr-row"><div class="taxr-col1"><a href="javascript:;" id="taxr-info-cat-healthcare1" title="Spending on grants to states for Medicaid and CHIP. (Corresponds to budget function 550 accounts for Grants to States for Medicaid, and Children&quot;s Health Insurance Program)">Medicaid and Children&quot;s Health Insurance Program (CHIP)</a></div><div class="taxr-col2">10.0%</div><div class="taxr-col3"><div id="taxr-data-percent-healthcare1" data-percent="10.0">$0</div></div></div>
+					<div class="taxr-row"><div class="taxr-col1"><a href="javascript:;" id="taxr-info-cat-healthcare1" title="Spending on grants to states for Medicaid and CHIP. (Corresponds to budget function 550 accounts for Grants to States for Medicaid, and Children's Health Insurance Program)">Medicaid and Children's Health Insurance Program (CHIP)</a></div><div class="taxr-col2">10.0%</div><div class="taxr-col3"><div id="taxr-data-percent-healthcare1" data-percent="10.0">$0</div></div></div>
 					<div class="taxr-row"><div class="taxr-col1"><a href="javascript:;" id="taxr-info-cat-healthcare2" title="Spending for Medicare Supplementary Medical Insurance and the prescription drug benefit. Medicare helps pay for health care for insured seniors and individuals with disabilities. Because this calculator focuses on how income taxes are spent, spending from Medicare taxes &mdash; which primarily help pay for hospitalizations &mdash; is excluded. (Corresponds to budget function 570)">Medicare physician, prescription drug, and other payments</a></div><div class="taxr-col2">10.5%</div><div class="taxr-col3"><div id="taxr-data-percent-healthcare2" data-percent="10.5">$0</div></div></div>
 					<div class="taxr-row"><div class="taxr-col1"><a href="javascript:;" id="taxr-info-cat-healthcare3" title="Spending on the National Institutes of Health, Food and Drug Administration, and other health research and food safety activities. (Corresponds to budget subfunctions 552 and 554)">Health research and food safety</a></div><div class="taxr-col2">1.4%</div><div class="taxr-col3"><div id="taxr-data-percent-healthcare3" data-percent="1.4">$0</div></div></div>
 					<div class="taxr-row"><div class="taxr-col1"><a href="javascript:;" id="taxr-info-cat-healthcare4" title="Spending on the disease control, substance abuse services, Indian health services, and other public health. (Corresponds to budget subfunction 551 accounts for Substance Abuse and Mental Health Services, Indian Health, Health Resources and Services Administration, Disease Control, Research, and Training, Public Health and Social Services Emergency Fund, Biodefense Countermeasures Acquisition, and Vaccine Injury Trust Fund Account)">Disease control and public health services</a></div><div class="taxr-col2">0.8%</div><div class="taxr-col3"><div id="taxr-data-percent-healthcare4" data-percent="0.8">$0</div></div></div>
-					<div class="taxr-row"><div class="taxr-col1"><a href="javascript:;" id="taxr-info-cat-healthcare5" title="Spending on COBRA tax credit, Federal employees&quot; health benefits, and additional health care activities. (Corresponds to remainder of budget function 550)">COBRA tax credit and additional health care activities</a></div><div class="taxr-col2">0.9%</div><div class="taxr-col3"><div id="taxr-data-percent-healthcare5" data-percent="0.9">$0</div></div></div>
+					<div class="taxr-row"><div class="taxr-col1"><a href="javascript:;" id="taxr-info-cat-healthcare5" title="Spending on COBRA tax credit, Federal employees' health benefits, and additional health care activities. (Corresponds to remainder of budget function 550)">COBRA tax credit and additional health care activities</a></div><div class="taxr-col2">0.9%</div><div class="taxr-col3"><div id="taxr-data-percent-healthcare5" data-percent="0.9">$0</div></div></div>
 				</div>
 			<div id="taxr-cat-head-income" class="odd"><div class="taxr-row"><div class="taxr-col1"><a href="javascript:;" id="taxr-info-cat-income" class="underline2" title="Spending on unemployment insurance, food assistance, relevant tax credits, and other programs designed for income security. Because this calculator focuses on how income taxes are spent, spending from unemployment insurance taxes is excluded. (Corresponds to budget function 600)">Job and Family Security</a></div><div class="taxr-col2">19.1%</div><div class="taxr-col3"><div id="taxr-data-percent-incomesecurity" data-percent="19.1">$0</div></div></div></div>
 				<div id="taxr-cat-content-income" class="taxr-cat-sub">
@@ -180,7 +136,7 @@ function _original_html() {
 				</div>				
 			<div id="taxr-cat-head-natural"><div class="taxr-row"><div class="taxr-col1"><a href="javascript:;" id="taxr-info-cat-environment" class="underline2" title="Spending on water management, energy supply, pollution control, and other activities related to natural resources, energy, and the environment. (Corresponds to budget functions 270 and 300)">Natural Resources, Energy, and Environment</a></div><div class="taxr-col2">2.0%</div><div class="taxr-col3"><div id="taxr-data-percent-environment" data-percent="2.0">$0</div></div></div></div>
 				<div id="taxr-cat-content-natural" class="taxr-cat-sub">
-					<div class="taxr-row"><div class="taxr-col1"><a href="javascript:;" id="taxr-info-cat-environment1" title="Spending on managing the nation&quot;s water and land, including flood prevention, water conservation, and forest management. (Corresponds to budget subfunctions 301 and 302)">Water and land management</a></div><div class="taxr-col2">0.8%</div><div class="taxr-col3"><div id="taxr-data-percent-environment1" data-percent="0.9">$0</div></div></div>
+					<div class="taxr-row"><div class="taxr-col1"><a href="javascript:;" id="taxr-info-cat-environment1" title="Spending on managing the nation's water and land, including flood prevention, water conservation, and forest management. (Corresponds to budget subfunctions 301 and 302)">Water and land management</a></div><div class="taxr-col2">0.8%</div><div class="taxr-col3"><div id="taxr-data-percent-environment1" data-percent="0.9">$0</div></div></div>
 					<div class="taxr-row"><div class="taxr-col1"><a href="javascript:;" id="taxr-info-cat-environment2" title="Spending on renewable energy development, the Tennessee Valley Authority, and other acitivites related to energy supply and conservation.  (Corresponds to budget subfunctions 271 and 272)">Energy supply and conservation</a></div><div class="taxr-col2">0.5%</div><div class="taxr-col3"><div id="taxr-data-percent-environment2" data-percent="0.5">$0</div></div></div>
 					<div class="taxr-row"><div class="taxr-col1"><a href="javascript:;" id="taxr-info-cat-environment3" title="Spending on pollution control, emergency energy preparedness, recreation, and other activities related to natural resources and the environment. (Corresponds to the remainder of budget functions 270 and 300)"> Environmental protection and other energy and natural resources</a></div><div class="taxr-col2">0.7%</div><div class="taxr-col3"><div id="taxr-data-percent-environment3" data-percent="0.7">$0</div></div></div>
 				</div>		
@@ -226,7 +182,7 @@ function _original_html() {
 		</div>
 		<p>The Medicare Hospital Insurance and Social Security trust funds are funded primarily with dedicated payroll taxes. Because the amount you contribute to these trust funds is readily available on your W-2 form that you get from your employer, these tax payments are shown separately on the tax receipt. There are other key federal programs paid for with dedicated funding sources independent of federal income tax payments, such as highway and mass transit spending. If the cost of these programs exceeds the amount of funding, the difference covered by your tax dollars is shown on the tax receipt.</p>
  
-		<p>Even including revenue from all these sources, Federal Government spending has exceeded the revenue it collects since 2002. This shortfall between revenues and spending is known as the budget deficit, and in 2011 it was $1.300 trillion. Learn more about how<a href="http://www.whitehouse.gov/blog/2012/02/13/2013-budget-0" target="_blank"> President Obama&quot;s budget would reduce the budget deficit</a> at WhiteHouse.gov.</a></p>
+		<p>Even including revenue from all these sources, Federal Government spending has exceeded the revenue it collects since 2002. This shortfall between revenues and spending is known as the budget deficit, and in 2011 it was $1.300 trillion. Learn more about how<a href="http://www.whitehouse.gov/blog/2012/02/13/2013-budget-0" target="_blank"> President Obama's budget would reduce the budget deficit</a> at WhiteHouse.gov.</a></p>
  
 		<h3>Organization of the Budget</h3>
 
@@ -250,12 +206,10 @@ function _original_html() {
 			<div id="taxr-footer-link-list" style="padding: 0 8px 0 0; border-right: 1px solid #333;"><a target="_blank" class="underline" href="http://www.whitehouse.gov/get-email-updates">Sign up for email updates from the White House</a></div>
 			
 			<div id="taxr-footer-link-list" style="padding-left: 8px;"><a href="http://www.whitehouse.gov/tax-receipt/feedback" target="_blank" class="underline">Share your thoughts on this receipt</a></div>
-      <a id="taxr-embedbox-link" href="javascript:;" data-embed="<p>Copy this code to embed the taxpayer receipt tool on your website:</p><textarea rows=&quot;5&quot; cols=&quot;30&quot;><iframe scrolling=&quot;no&quot; frameborder=&quot;0&quot; height=&quot;2150&quot; width=&quot;700&quot; src=&quot;http://www.whitehouse.gov/files/taxreceipt2012/index.html&quot; target=&quot;_blank&quot;></iframe></textarea>">Embed the Taxpayer Receipt Tool on Your Own Website</a>
+      <a id="taxr-embedbox-link" href="javascript:;" data-embed="<p>Copy this code to embed the taxpayer receipt tool on your website:</p><textarea rows='5' cols='30'><iframe scrolling='no' frameborder='0' height='2150' width='700' src='http://www.whitehouse.gov/files/taxreceipt2012/index.html' target='_blank'></iframe></textarea>">Embed the Taxpayer Receipt Tool on Your Own Website</a>
 		</div>
 	</div>
 </div><!-- end #taxr-tabset -->
   <div id="taxr-footer">
   </div><!-- end #taxr-footer -->
 </body>
-'; 
-}
