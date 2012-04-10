@@ -9,7 +9,12 @@
 function taxreceipt_menu() {
   $items = array();
 
-  $items['taxreceipt/%'] = array(
+  // TODO remove. for dev only.
+  $items['taxreceipt/original'] = array(
+    'page callback' => 'taxreceipt_original_page',
+    'access arguments' => array('access content'),
+  );
+  $items['taxreceipt/%node'] = array(
     'page callback' => 'taxreceipt_page',
     'page arguments' => array(1),
     'access arguments' => array('access content'),
@@ -19,25 +24,171 @@ function taxreceipt_menu() {
 }
 
 /**
+ * Implements hook_theme().
+ */
+function taxreceipt_theme() {
+  return array(
+    'taxreceipt' => array(
+      'arguments' => array('node' => NULL),
+      'template' => 'taxreceipt',
+    ), 
+  );  
+}
+
+
+/**
  * Callback for path: taxreceipt/%.
  * 
- * $arg
- *  String or Integer.
+ * @param $node
+ *  Node object.
+ * 
+ * @return 
+ *  String. HTML.
  */
-function taxreceipt_page($arg) {
-  $html = '';
-  if ($arg == 'original') {
-    $html = _original_html();
+function taxreceipt_page($node) {
+  $output = '';
+
+  if ($node->type == 'taxreceipt') {
+    $output = theme('taxreceipt', $node);
   }
-  else if (is_numeric($arg)) {
-    // $arg should be an nid.
-    // @todo Add validation/error handling here.
-    $node = node_load($arg);
-    
+  else {
+    $text = t('Tax receipts require a valid tax receipt node ID in the path. No valid tax receipt node type found.');
+    watchdog('taxreceipt', $text);
+    drupal_set_message($text, 'warning');
   }
-  return $html;
+
+  return $output;
 } 
 
+/**
+ * Implements hook_preprocess_hook().
+ */
+function taxreceipt_preprocess_taxreceipt($variables) {
+  $path = drupal_get_path('module', 'taxreceipt');
+
+  drupal_add_js($path . '/js/jquery-1.4.4.min.js');
+  drupal_add_js($path . '/js/jquery.bt.min.js');
+  drupal_add_js($path . '/js/jquery.hoverIntent.min.js');
+  drupal_add_js($path . '/js/receipt.js');
+  // drupal_add_js($path . '/js/highcharts.src.js');
+  // drupal_add_js($path . '/js/chart.js');
+
+  drupal_add_css($path . '/css/receipt.css');
+  drupal_add_css($path . 'css/receipt-print.css');
+
+  // Get tax receipt line items from taxreceipt node, field_taxreceipt_line_item field.
+  $node = $variables['node'];
+  $line_items = array();
+  foreach ($node->field_taxreceipt_line_item as $line_item) {
+    // Convert line item string to an array.
+    $line_item = _taxreceipt_process_line_item(trim(check_plain($line_item['value'])));
+    // If it's a subcategory, store it under its parent.
+    $machine_name = array_pop(array_keys($line_item));
+    if ($line_item[$machine_name]['is_subcategory']) {
+      $parent = $line_item[$machine_name]['parent'];
+      $line_items[$parent]['subcategories'][$machine_name] = $line_item[$machine_name];
+    }
+    else {
+      $line_items += $line_item;
+    }
+  }
+
+  // Surface these variables in taxreceipt.tpl.php:
+  $variables['line_items'] = $line_items;
+}
+
+/**
+ *  Check if item is a sub-category of another line item. Sub-categories 
+ *  written like this: 
+ * 
+ *    *Parent line item name  -- line item name -- (optional) description -- percentage
+ * 
+ * @return
+ *  Boolean.
+ */
+function taxreceipt_line_item_is_subcategory($line_item) {
+  $is_subcategory = (substr($line_item, 0, 1) == '*') ? TRUE : FALSE; 
+  return $is_subcategory;
+}
+
+/**
+ * Convert line item string from taxreceipt node to a useful array.
+ * 
+ * Line items follow this pattern:
+ *   Line item name  -- (optional) description -- percentage
+ * Or:
+ *   *Parent line item name  -- line item name -- (optional) description -- percentage
+ * 
+ * @return $line_item
+ *  Associative array with these elements:
+ *   - $item[$machine_name]['title']
+ *   - $item[$machine_name]['machine-name']
+ *   - $item[$machine_name]['percent']
+ *   - $item[$machine_name]['description']
+ *   - $item[$machine_name]['is_subcategory']
+ *   - $item[$machine_name]['parent']
+ */
+function _taxreceipt_process_line_item($line_item) {
+  $item = array();
+
+  // Get and count parts of $line_item.
+  //   count 2 looks like: line item name -- n%
+  //   count 3 looks like: line item name -- description -- n%
+  $parts = explode('--', $line_item);
+  $count = count($parts);
+
+  // Check if item is a sub-category of another line item.
+  if ($is_subcategory = taxreceipt_line_item_is_subcategory($line_item)) {
+    // Shift the first, parent, element off the $parts array.
+    $parent = substr(array_shift($parts), 1);
+    $parent = _taxreceipt_machine_name(trim($parent));
+  }
+
+  // Format line item array.
+  $item_title = trim($parts[0]);
+  $machine_name = _taxreceipt_machine_name($item_title);
+  $item[$machine_name]['title'] = $item_title;
+  $item[$machine_name]['machine-name'] = $machine_name;
+  $item[$machine_name]['percent'] = ($count == 3) ? trim($parts[2]) : trim($parts[1]);
+  $item[$machine_name]['description'] = ($count == 3) ? trim($parts[1]) : '';
+  if ($is_subcategory) {
+    $item[$machine_name]['is_subcategory'] = TRUE;
+    $item[$machine_name]['parent'] = $parent;
+  }
+  else {
+    $item[$machine_name]['is_subcategory'] = FALSE;
+  }
+
+  // Clean up $percent.
+  $percent = $line_items[$machine_name]['percent'];
+  if (substr($percent, -1) == '%') {
+    $percent = substr($percent, 0, strlen($percent) - 1);
+    $item[$machine_name]['percent'] = $percent;
+  }
+
+  return $item;
+}
+
+/** 
+ * @param $name
+ *  String. E.g. "National Defense"
+ * 
+ * @return
+ *  String. E.g. "national-defense"
+ */
+function _taxreceipt_machine_name($name) {
+  return strtolower(preg_replace('/[^a-zA-Z0-9-]+/', '-', $name));
+}
+
+//-------------------------------------------//
+// dev stuff. remove everything below here 
+// for clean up.
+//-------------------------------------------//
+
+// TODO remove. for dev only.
+function taxreceipt_original_page() {
+  return _original_html();
+}
 
 function _original_html() {
   $path = drupal_get_path('module', 'taxreceipt');
@@ -67,7 +218,7 @@ function _original_html() {
 </div>
 <div id="taxr-tabset">
 	<div id="taxr-calculate" class="taxr-tab">
-		<div id="taxr-calculate-form-top">
+		<div id="taxr-calculate-form-top" width="700px">
 			<div id="taxr-calculate-form">
 			  <div class="taxr-instructions">Enter your 2011 payments below or select an estimate from the drop down menu</div>
 				<div id="taxr-error-numeric">There is an error with one of your inputs &mdash; please only use positive, numeric values (0-9) </div>

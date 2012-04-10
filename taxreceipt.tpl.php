@@ -3,7 +3,10 @@
  * @file taxreceipt.tpl.php
  * 
  * variables
- * - $line_items, array('Line item name' => 'percent')
+ * - $line_items array
+ *     $line_items[$title]['title'] = $title;
+ *     $line_items[$title]['description'] = $description;
+ *     $line_items[$title]['percentage'] = $percentage;
  *     e.g. $line_items = array('National Defense' => '24.9', ... )
  */
 $vars = get_defined_vars();
@@ -93,6 +96,7 @@ dsm($vars);
 		</div>
 		<div class="clearfix"></div>
 		<div id="taxr-categories">
+      <!-- CONTINUE HERE. LOOP THROUGH LINE ITEMS TO GENERATE THIS STUFF  -->
 			<div id="taxr-cat-head-defense" class="odd"><div class="taxr-row"><div class="taxr-col1"><a href="javascript:;" id="taxr-info-cat-defense" class="underline2" title="Spending on military personnel, operations, procurement and other activities critical to our national defense. (Corresponds to budget function 050)">National Defense</a></div><div class="taxr-col2">24.9%</div><div class="taxr-col3"><div id="taxr-data-percent-defense" data-percent="24.9">$0</div></div></div></div>
 				<div id="taxr-cat-content-defense" class="taxr-cat-sub">
 					<div class="taxr-row"><div class="taxr-col1"><a href="javascript:;" id="taxr-info-cat-defense1" title="Spending on salaries and benefits for military personnel as well as housing benefits for military families. (Corresponds to budget function 050 accounts for Military Personnel, Family Housing, and Concurrent Receipt Accrual Payments to the Military Retirement Fund)">Military personnel salaries and benefits</a></div><div class="taxr-col2">5.8%</div><div class="taxr-col3"><div id="taxr-data-percent-defense1" data-percent="5.8">$0</div></div></div>
