@@ -32,6 +32,10 @@ function taxreceipt_theme() {
       'arguments' => array('node' => NULL),
       'template' => 'taxreceipt',
     ), 
+    'taxreceipt-line-item' => array(
+      'arguments' => array('line_item' => NULL),
+      'template' => 'taxreceipt-line-item',
+    ), 
   );  
 }
 
