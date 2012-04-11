@@ -32,10 +32,20 @@ function taxreceipt_theme() {
       'arguments' => array('node' => NULL),
       'template' => 'taxreceipt',
     ), 
+<<<<<<< HEAD
   );  
 }
 
 
+=======
+    'taxreceipt-line-item' => array(
+      'arguments' => array('line_item' => NULL),
+      'template' => 'taxreceipt-line-item',
+    ), 
+  );  
+}
+
+>>>>>>> dev
 /**
  * Callback for path: taxreceipt/%.
  * 
@@ -80,6 +90,10 @@ function taxreceipt_preprocess_taxreceipt($variables) {
   $node = $variables['node'];
   $line_items = array();
   foreach ($node->field_taxreceipt_line_item as $line_item) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> dev
     // Convert line item string to an array.
     $line_item = _taxreceipt_process_line_item(trim(check_plain($line_item['value'])));
     // If it's a subcategory, store it under its parent.
@@ -91,10 +105,18 @@ function taxreceipt_preprocess_taxreceipt($variables) {
     else {
       $line_items += $line_item;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> dev
   }
 
   // Surface these variables in taxreceipt.tpl.php:
   $variables['line_items'] = $line_items;
+<<<<<<< HEAD
+=======
+
+>>>>>>> dev
 }
 
 /**
@@ -122,7 +144,11 @@ function taxreceipt_line_item_is_subcategory($line_item) {
  * @return $line_item
  *  Associative array with these elements:
  *   - $item[$machine_name]['title']
+<<<<<<< HEAD
  *   - $item[$machine_name]['machine-name']
+=======
+ *   - $item[$machine_name]['machine_name']
+>>>>>>> dev
  *   - $item[$machine_name]['percent']
  *   - $item[$machine_name]['description']
  *   - $item[$machine_name]['is_subcategory']
@@ -148,7 +174,11 @@ function _taxreceipt_process_line_item($line_item) {
   $item_title = trim($parts[0]);
   $machine_name = _taxreceipt_machine_name($item_title);
   $item[$machine_name]['title'] = $item_title;
+<<<<<<< HEAD
   $item[$machine_name]['machine-name'] = $machine_name;
+=======
+  $item[$machine_name]['machine_name'] = $machine_name;
+>>>>>>> dev
   $item[$machine_name]['percent'] = ($count == 3) ? trim($parts[2]) : trim($parts[1]);
   $item[$machine_name]['description'] = ($count == 3) ? trim($parts[1]) : '';
   if ($is_subcategory) {
