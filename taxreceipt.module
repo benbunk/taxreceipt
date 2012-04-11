@@ -128,7 +128,7 @@ function taxreceipt_line_item_is_subcategory($line_item) {
  * @return $line_item
  *  Associative array with these elements:
  *   - $item[$machine_name]['title']
- *   - $item[$machine_name]['machine-name']
+ *   - $item[$machine_name]['machine_name']
  *   - $item[$machine_name]['percent']
  *   - $item[$machine_name]['description']
  *   - $item[$machine_name]['is_subcategory']
@@ -154,7 +154,7 @@ function _taxreceipt_process_line_item($line_item) {
   $item_title = trim($parts[0]);
   $machine_name = _taxreceipt_machine_name($item_title);
   $item[$machine_name]['title'] = $item_title;
-  $item[$machine_name]['machine-name'] = $machine_name;
+  $item[$machine_name]['machine_name'] = $machine_name;
   $item[$machine_name]['percent'] = ($count == 3) ? trim($parts[2]) : trim($parts[1]);
   $item[$machine_name]['description'] = ($count == 3) ? trim($parts[1]) : '';
   if ($is_subcategory) {

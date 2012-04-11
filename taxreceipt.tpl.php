@@ -10,6 +10,7 @@
  *  - $is_front
  *  - $logged_in
  *  - $db_is_active
+ *  - $zebra
  * 
  *  - $line_items, array including:
  *     $line_items[$machine_name]['title']
