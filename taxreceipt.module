@@ -35,7 +35,6 @@ function taxreceipt_theme() {
   );  
 }
 
-
 /**
  * Callback for path: taxreceipt/%.
  * 
@@ -80,6 +79,7 @@ function taxreceipt_preprocess_taxreceipt($variables) {
   $node = $variables['node'];
   $line_items = array();
   foreach ($node->field_taxreceipt_line_item as $line_item) {
+
     // Convert line item string to an array.
     $line_item = _taxreceipt_process_line_item(trim(check_plain($line_item['value'])));
     // If it's a subcategory, store it under its parent.
@@ -91,10 +91,12 @@ function taxreceipt_preprocess_taxreceipt($variables) {
     else {
       $line_items += $line_item;
     }
+
   }
 
   // Surface these variables in taxreceipt.tpl.php:
   $variables['line_items'] = $line_items;
+
 }
 
 /**
