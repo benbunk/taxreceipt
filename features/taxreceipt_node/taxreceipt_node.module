@@ -1,0 +1,3 @@
+<?php
+
+include_once('taxreceipt_node.features.inc');
