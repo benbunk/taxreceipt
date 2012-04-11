@@ -111,6 +111,8 @@
 		<div id="taxr-categories">
 
       <?php foreach ($line_items as $line_item) { print theme('taxreceipt-line-item', $line_item); } ?>
+      
+    </div>
 
 			<div id="taxr-cat-tophead"><div class="taxr-row"><div class="taxr-col1"><a href="javascript:;" id="taxr-info-cat-agriculture" title="Spending on interest, including interest on Treasury debt securities. (Corresponds to budget function 900)">Net Interest</a></div><div class="taxr-col2">8.1%</div><div class="taxr-col3"><div id="taxr-data-percent-interest" data-percent="7.4">$0</div></div></div></div>
 
