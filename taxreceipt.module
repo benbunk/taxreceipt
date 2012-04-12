@@ -167,9 +167,10 @@ function _taxreceipt_process_line_item($line_item) {
   }
 
   // Clean up $percent.
-  $percent = $line_items[$machine_name]['percent'];
-  if (substr($percent, -1) == '%') {
-    $percent = substr($percent, 0, strlen($percent) - 1);
+  $percent = $item[$machine_name]['percent'];
+  if ($position = strpos($percent, '%')) {
+  //if (substr($percent, -1) == '%') {
+    $percent = substr($percent, 0, $postion - 1);
     $item[$machine_name]['percent'] = $percent;
   }
 
