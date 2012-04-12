@@ -34,26 +34,27 @@
     </div>
   </div>
 
-<?php if (!empty($line_item['subcategories'])) {
-        $i = 0;
-        foreach ($line_item['subcategories'] as $subcategory) {
-          $i++; ?>
+<?php if (!empty($line_item['subcategories'])) { $i = 0; ?>
 
-          <div id="taxr-cat-content-<?php $subcategory['parent']; ?>" class="taxr-cat-sub">
-            <div class="taxr-row">
-              <div class="taxr-col1">
-                <a href="javascript:;" id="taxr-info-cat-<?php print $subcategory['parent'] . $i; ?>" title="<?php print $subcategory['description']; ?>">
-                  <?php print $subcategory['title']; ?>
-                </a>
-              </div>
-            <div class="taxr-col2"><?php print $subcategory['percent']; ?></div>
-            <div class="taxr-col3">
-              <div id="taxr-data-percent-<?php print $subcategory['parent'] . $i; ?>" data-percent="<?php print $subcategory['percent']; ?>">$0</div>
-            </div>
-          </div>
+  <div id="taxr-cat-content-<?php $line_item['machine_name']; ?>" class="taxr-cat-sub">
+
+    <?php foreach ($line_item['subcategories'] as $subcategory) { $i++; /* dsm($subcategory); */ ?>
+
+      <div class="taxr-row">
+        <div class="taxr-col1">
+          <a href="javascript:;" id="taxr-info-cat-<?php print $subcategory['parent'] . $i; ?>" title="<?php print $subcategory['description']; ?>">
+          <!-- <a href="javascript:;" id="taxr-info-cat-<?//php print $subcategory['parent'] . $i; ?>" title="" bt-xtitle="<?php //print $subcategory['description']; ?>" class=""> -->
+            <?php print $subcategory['title']; ?>
+          </a>
+        </div>
+      <div class="taxr-col2"><?php print $subcategory['percent']; ?></div>
+      <div class="taxr-col3">
+        <div id="taxr-data-percent-<?php print $subcategory['parent'] . $i; ?>" data-percent="<?php print $subcategory['percent']; ?>">$0</div>
+      </div>
     </div>
 
   <?php } // end foreach $subcategory ?>
+  </div>
 <?php } // end if ?>
 
 

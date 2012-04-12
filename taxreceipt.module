@@ -137,11 +137,7 @@ function taxreceipt_line_item_is_subcategory($line_item) {
 function _taxreceipt_process_line_item($line_item) {
   $item = array();
 
-  // Get and count parts of $line_item.
-  //   count 2 looks like: line item name -- n%
-  //   count 3 looks like: line item name -- description -- n%
   $parts = explode('--', $line_item);
-  $count = count($parts);
 
   // Check if item is a sub-category of another line item.
   if ($is_subcategory = taxreceipt_line_item_is_subcategory($line_item)) {
@@ -149,6 +145,11 @@ function _taxreceipt_process_line_item($line_item) {
     $parent = substr(array_shift($parts), 1);
     $parent = _taxreceipt_machine_name(trim($parent));
   }
+
+  // Get and count parts of $line_item.
+  //   count 2 looks like: line item name -- n%
+  //   count 3 looks like: line item name -- description -- n%
+  $count = count($parts);
 
   // Format line item array.
   $item_title = trim($parts[0]);
