@@ -47,7 +47,7 @@
             <?php print $subcategory['title']; ?>
           </a>
         </div>
-      <div class="taxr-col2"><?php print $subcategory['percent']; ?></div>
+      <div class="taxr-col2"><?php print $subcategory['percent'] . '%'; ?></div>
       <div class="taxr-col3">
         <div id="taxr-data-percent-<?php print $subcategory['parent'] . $i; ?>" data-percent="<?php print $subcategory['percent']; ?>">$0</div>
       </div>
