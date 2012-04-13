@@ -1,12 +1,14 @@
-html,
-body {
+#taxr-page {
   padding: 0;
-  margin: 0;
   border: 0;
   text-align: center;
   color: #333;
   font-family: Arial,Helvetica,sans-serif;
   font-size: 12px;
+  width: 696px;
+  margin: 0 auto;
+  background: #fff;
+  text-align: left;
 }
 html.withbg body {
   background: transparent;
@@ -36,10 +38,7 @@ html.withbg body {
 }
 
 #taxr-page {
-  width: 696px;
-  margin: 0 auto;
-  background: #fff;
-  text-align: left;
+
 }
 
   /* For addthis */
@@ -252,18 +251,21 @@ div[id*='taxr-cat-content-'] {
   color: #cecece;
   height: 1px;
   width: 565px;
+  margin: 0 auto;
 }
 
-#taxr-header-title h1{
+#taxr-header-title h1 {
   font-size: 36px;
   text-transform: uppercase;
   font-family: Georgia , Serif;
   margin: 0px;
+  line-height: 48px;
 }
 #taxr-header-title .subtitle{
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 1px;
+  line-height: 30px;
 }
 #taxr-nav { 
 	padding: 5px; 
@@ -276,7 +278,6 @@ div[id*='taxr-cat-content-'] {
 .taxr-instructions {
   color: #EEEEEE;
   font-weight: bold;
-  padding-top: 11px;
   text-align: center;
 }	
 #taxr-tabset {
@@ -443,7 +444,10 @@ textarea {
 	float: left;
 	color: #880000;
 }
-
+.print-wrap{
+  width: 100%;
+  height: 36px;
+}
 #taxr-print-link {
 	border: 0px;	
 	background: url("../images/calculator_print_button.png") no-repeat scroll transparent;
