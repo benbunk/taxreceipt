@@ -1,3 +1,6 @@
 name = Tax Receipt
 description = See http://www.whitehouse.gov/2011-taxreceipt
 core = 6.x
+
+dependencies[] = features
+dependencies[] = taxreceipt_node
