@@ -24,6 +24,89 @@
  * TODO?...
  *  - $date
  *  - $city
+ *
+ * @info
+ *
+ * Inside categories you have sub-categories. Inside each sub-category you have rows.
+ *
+ * A category is defined by <div id="taxr-cat-head-XXX">
+ * A sub-category (also known as the content of the category)
+ *  is defined as a consecutive-non-nested div by <div id="taxr-cat-content-XXX" class="taxr-cat-sub">
+ *  where XXX in the category and the sub-category are the same.
+ *
+ * A category's data is a single nested row like this:
+ *   <div id="taxr-cat-head-XXX">
+ *     <div class="taxr-row"></div>
+ *   </div>
+ *
+ * A subcategories data is between 1 and N rows like this:
+ *   <div id="taxr-cat-content-XXX" class="taxr-cat-sub">
+ *     <div class="taxr-row"></div>
+ *     <div class="taxr-row"></div>
+ *     <div class="taxr-row"></div>
+ *     ...N
+ *   </div>
+ *
+ * A row is declared the exact same weather in a category or subcategory and has 3 columns. Declared As:
+ *   <div class="taxr-row">
+ *     <div class="taxr-col1"></div>
+ *     <div class="taxr-col2"></div>
+ *     <div class="taxr-col3"></div>
+ *   </div>
+ *
+ * There are 3 types of data a column can hold -
+ *   A description - Contains a link title for the hover state and a tool-tip style long description.
+ *   A Percentage - Display only.
+ *   A calculated value - A div which contains a special field named data-percent which has a value of the
+ *     percentage to be calculated against the total.
+ *
+ * Descriptions are declared as -
+ *  <div class="taxr-col1">
+ *    <a href="javascript:;"
+ *      id="taxr-info-cat-XXX"
+ *      title=""
+ *      bt-xtitle="Long Description Tool-Tip"
+ *      class="">
+ *      Link Title for Hover State
+ *    </a>
+ *  </div>
+ *
+ * Percentage declared as -
+ *   <div class="taxr-col2">
+ *    5.8%
+ *   </div>
+ *
+ * Calculated Value Declared as -
+ *   <div class="taxr-col3">
+ *     <div id="taxr-data-percent-XXX" data-percent="5.8">$0</div>
+ *   </div>
+ *
+ *
+ * A Full example of a category with several subcategories would look like this:
+ *
+ * <div id="taxr-categories">
+ *   <div id="taxr-cat-head-defense" class="odd">
+ *     <div class="taxr-row">
+ *       <div class="taxr-col1">
+ *         <a href="javascript:;" id="taxr-info-cat-defense" class="underline2"
+ *           title="Spending on military personnel, operations to our national defense.">
+ *           National Defense
+ *         </a>
+ *       </div>
+ *       <div class="taxr-col2">24.9%</div>
+ *       <div class="taxr-col3">
+ *         <div id="taxr-data-percent-defense" data-percent="24.9">$0</div>
+ *       </div>
+ *     </div>
+ *   </div> <!-- End Category Head -->
+ *   <div id="taxr-cat-content-defense" class="taxr-cat-sub"> <!-- Begin Subcategories (content) -->
+ *       <div class="taxr-row">..See Row Above..</div>
+ *       <div class="taxr-row">..See Row Above..</div>
+ *       <div class="taxr-row">..See Row Above..</div>
+ *       <div class="taxr-row">..See Row Above..</div>
+ *   </div> <!-- End Subcategories -->
+ * </div>
+ *
  */
 ?>
 <div id="taxr-page">
